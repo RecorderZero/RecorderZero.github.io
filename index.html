@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head><title>Voting DApp</title></head>
+  <body>
+    <h1>Voting DApp</h1>
+    <button onclick="connectWallet()">Connect Wallet</button>
+    <div id="walletAddress"></div>
+    <br>
+    <input id="proposalText" placeholder="Enter proposal" />
+    <button onclick="propose()">Submit Proposal</button>
+    <br><br>
+    <input id="newStart" placeholder="Start in (seconds)" type="number" />
+    <input id="newEnd" placeholder="End in (seconds)" type="number" />
+    <button onclick="updateVotingPeriod()">Restart Vote</button>
+    <br><br>
+    <div id="proposals"></div>
+    <button onclick="processProposals()">Process Winning Proposal</button>
+    <div id="processResult"></div>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
