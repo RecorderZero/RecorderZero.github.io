@@ -1,7 +1,7 @@
 let web3;
 let contract;
 let account;
-const contractAddress = "0x2715D93E290d3E5f008c5609E13d3697FbD26612";
+const contractAddress = "0x6480eABB98FFdF8b5dD37074C3a953f4BED41608";
 const abi = [
     {
       "inputs": [
@@ -425,10 +425,10 @@ const abi = [
     }
   ];
 
-async function getStatus() {
-    const status = await contract.methods.getVotingStatus().call();
-    console.log("Now:", status[0], "Start:", status[1], "End:", status[2]);
-}
+// async function getStatus() {
+//     const status = await contract.methods.getVotingStatus().call();
+//     console.log("Now:", status[0], "Start:", status[1], "End:", status[2]);
+// }
 
 async function connectWallet() {
   if (window.ethereum) {
@@ -440,7 +440,7 @@ async function connectWallet() {
     document.getElementById("walletAddress").innerText = "Connected: " + account;
     contract = new web3.eth.Contract(abi, contractAddress);
     loadProposals();
-    getStatus()
+    // getStatus()
   } else {
     alert("請安裝 MetaMask！");
   }
@@ -458,7 +458,7 @@ async function connectWallet() {
 
 async function propose() {
     const text = document.getElementById("proposalText").value;
-    getStatus()
+    // getStatus()
     try {
         await contract.methods.propose(text).send({ from: account });
     } catch (error) {
@@ -499,7 +499,7 @@ const extractReason = (message) => {
 };
 
 async function vote(index) {
-    getStatus()
+    // getStatus()
     try {
         
         await contract.methods.vote(index).send({ from: account });
@@ -527,7 +527,7 @@ async function updateVotingPeriod() {
         alert("請輸入有效的起始與結束時間（秒），且結束時間必須大於起始時間");
         return;
     }
-    getStatus()
+    // getStatus()
 
     const now = Math.floor(Date.now() / 1000);
     const newStart = now + startOffset;
@@ -551,7 +551,7 @@ async function updateVotingPeriod() {
 }
 
 async function processProposals() {
-    getStatus()
+    // getStatus()
     let receipt = ""
     try {
         
