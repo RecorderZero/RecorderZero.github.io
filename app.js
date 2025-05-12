@@ -422,7 +422,7 @@ async function connectWallet() {
     web3 = new Web3(window.ethereum);
     await window.ethereum.request({ method: "eth_requestAccounts" });
     const accounts = await web3.eth.getAccounts();
-    console.log(accounts)
+    // console.log(accounts)
     account = accounts[0];
     document.getElementById("walletAddress").innerText = "Connected: " + account;
     contract = new web3.eth.Contract(abi, contractAddress);
@@ -471,9 +471,9 @@ async function loadProposals() {
 }
 
 async function loadWinningProposal() {
-    console.log("loadWinningProposal")
+    // console.log("loadWinningProposal")
     const winningProposal = await contract.methods.getWinningProposal().call();
-    console.log(winningProposal)
+    // console.log(winningProposal)
     document.getElementById("processResult").innerHTML = 
         `Winning proposal: ${winningProposal.description}<br>
         Votes: ${winningProposal.voteCount}`;
@@ -519,7 +519,7 @@ async function updateVotingPeriod() {
     const now = Math.floor(Date.now() / 1000);
     const newStart = now + startOffset;
     const newEnd = now + endOffset;
-    console.log(now, newStart, newEnd)
+    // console.log(now, newStart, newEnd)
 
     try {
         await contract.methods.setVotingPeriod(newStart, newEnd).send({ from: account });
@@ -544,10 +544,10 @@ async function processProposals() {
         
         receipt = await contract.methods.processWinningProposal().send({ from: account });
 
-        console.log("Transaction successful:", receipt);
+        // console.log("Transaction successful:", receipt);
         
         try {
-            console.log("receipt != ''")
+            // console.log("receipt != ''")
             await loadWinningProposal()
             return
         } catch (error) {
